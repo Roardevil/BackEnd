@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vue.js Pet Depot</title>
+    <script src="https://unpkg.com/vue"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.js"></script>
+    <script src="vue.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div id="vueapp">
+
+
+        <div class="container">
+            <h1>Lessons</h1>
+
+
+
+            <select name="sortBy" id="select" v-model="sortBy">
+                <option value="location">Subject</option>
+                <option value="location">Location</option>
+                <option value="price">price</option>
+
+                <option value="space">Space</option>
+            </select> &nbsp &nbsp
+            <button type="up" v-on:click="ascending = !ascending">Sort By
+                <i v-if="ascending" class="glyphicon glyphicon-sort"></i>
+                <i v-else class="glyphicon glyphicon-sort"></i>
+            </button> &nbsp &nbsp
+            <input type="text" v-model="searchValue" placeholder="Search Lesson" id="search-input"></input>
+            <i class="fa fa-search"></i>
+            &nbsp &nbsp
+
+
+
+
+
+
+            <button type="button" v-on:click="showcheckout" :disabled="!cartItemCount">
+                <span class="glyphicon glyphicon-shopping-cart">{{ cartItemCount }}</span> Checkout
+            </button>
+            <br>
+            <br>
+            <br>
+
+        </div>
+
+
+
+        <div v-if="showproduct">
+            <div v-for="(lesson,count) in getlesson" :key="count">
+                <img v-bind:src="lesson.image" height="200" width="300">
+                <p>subject: {{ lesson.subject }}</p>
+                <!--Get data from object using v-text-->
+                <p>Location: {{ lesson.location }}</p>
+                <!--Get data from object-->
+                <p>Price: {{ lesson.price }}</p>
+                <!--Get data from object-->
+                <p>space: {{ lesson.space }}</p>
+                <!--Get data from object-->
+
+
+
+                <button class="btn btn-success" v-on:click="additem(count)" :disabled="isdisable(count)">Add
+                    to cart</button>
+
+                <span v-if="lesson.space === 0">All Out!
+                </span>
+                <span v-else-if="lesson.space<5">
+                    Only {{lesson.space}} left
+                </span>
+                <span v-else>Buy Now!
+                </span>
+                <div>
+                    <span v-for='n in lesson.rating'>★
+                    </span>
+                    <span v-for='n in 5-lesson.rating'>☆</span>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+        <div v-else>
+            <h1>School club checkout</h1>
+            <h4>
+                <strong>Enter Your Information</strong>
+            </h4>
+            <div v-if=" cartCount(index)>0" v-for="(lesson,index) in getlesson" :key="index">
+
+                <img v-bind:src="lesson.image" height="200" width="300">
+                <p>subject: {{ lesson.subject }}</p>
+                <!--Get data from object using v-text-->
+                <p>Location: {{ lesson.location }}</p>
+                <!--Get data from object-->
+                <p>Price: {{ lesson.price }}</p>
+                <!--Get data from object-->
+                <p>space: {{ cartCount(index) }}</p>
+                <!--Get data from object-->
+
+
+
+                <button v-on:click="removeButton(index)">Remove </button>
+
+
+                <span v-for='n in lesson.rating'>★
+                </span>
+                <span v-for='n in 5-lesson.rating'>☆</span>
+            </div>
+
+
+
+
+
+
+
+            <form>
+                <label for="Name">Name:</label>
+                <input v-model="name" id="name" required><br><br>
+                <label for="Phonenumber">Phonenumber:</label>
+                <input v-model="Phonenumber" id="Phonenumber" required><br><br>
+                <button :disabled="formisvalid" @click="submitform">submit</button>
+
+            </form>
+        </div>
+    </div>
+    </div>
+</body>
+
+<script src="lesson.js"></script>
+
+<script src="index.js"></script>
+
+
+
+
+
+
+
+</html>
