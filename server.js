@@ -1,5 +1,4 @@
 //Import the express and url modules
-const { json } = require('body-parser');
 let express = require('express');
 let url = require("url");
 
@@ -95,6 +94,14 @@ app.post('/collection/:collectionName'
             res.send(200)
         })
     });
+app.delete('/collection/:collectionName'
+    , (req, res, next) => {
+        console.log(req);
+        req.collection.delete(req.body, (e, results) => {
+            if (e) return next(e)
+            res.send(200)
+        })
+    });
 const ObjectID = require('mongodb').ObjectID;
 
 app.put('/collection/:collectionName/:id', (req, res, next) => {
@@ -110,7 +117,7 @@ app.put('/collection/:collectionName/:id', (req, res, next) => {
 });
 app.use('/'
     , function (req, res) {
-        res.send('Select a collection, e.g., /collection/messages')
+        res.send('Welcome to Deep WebApp ')
     });
 
 //Start the app listening on port 8080
