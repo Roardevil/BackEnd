@@ -24,8 +24,8 @@ var app = new Vue({
     methods: {
 
         additem(id) {
-            if (product[id].space > 0) {
-                this.space = --product[id].space;
+            if (this.product[id].space > 0) {
+                --this.product[id].space;
 
 
                 this.cart.push(id);
