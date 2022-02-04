@@ -1,7 +1,7 @@
 var app = new Vue({
     el: "#vueapp",
     data: {
-        lesson: [],
+        product: [],
         showproduct: true,
         ascending: true,
         sortBy: 'location',
@@ -22,21 +22,17 @@ var app = new Vue({
 
     },
     methods: {
-        productsFetch: async function () {
-            const response = await fetch("https://deepwebapp.herokuapp.com/collection/products");
-            const data = await response.json();
-            this.product = data;
-        },
+
         additem(id) {
-            if (lesson[id].space > 0) {
-                this.space = --lesson[id].space;
+            if (product[id].space > 0) {
+                this.space = --product[id].space;
 
 
                 this.cart.push(id);
             }
         },
         isdisable(cet) {
-            return this.lesson[cet].space === 0;
+            return this.product[cet].space === 0;
 
         },
 
@@ -44,10 +40,10 @@ var app = new Vue({
         showcheckout() {
             this.showproduct = this.showproduct ? false : true;
         },
-        canaddtocart(alesson) {
-            console.log("iuhiyheiuh   " + this.lesson[alesson].space + "yuguyguy  " + alesson);
+        canaddtocart(aproduct) {
+            console.log("iuhiyheiuh   " + this.product[aproduct].space + "yuguyguy  " + aproduct);
 
-            return this.lesson[alesson].space > 4;
+            return this.product[aproduct].space > 4;
         },
         cartCount(id) {
             let count = 0;
@@ -76,7 +72,7 @@ var app = new Vue({
 
         },
         removeButton(index) {
-            this.lesson[index].space++;
+            this.product[index].space++;
             for (let i = 0; i < this.cart.length; i++) {
                 if (this.cart[i] == index) {
                     this.cart.splice(i, 1);
@@ -112,14 +108,14 @@ var app = new Vue({
 
         },
 
-        getlesson() {
+        getproduct() {
 
-            let searchlesson = this.lesson
+            let searchproduct = this.product
 
             // Process search input
             if (this.searchValue != '' && this.searchValue) {
-                searchlesson = searchlesson.filter((lesson) => {
-                    return lesson.subject
+                searchproduct = searchproduct.filter((product) => {
+                    return product.subject
                         .toLowerCase()
                         .includes(this.searchValue.toLowerCase())
                 })
@@ -128,7 +124,7 @@ var app = new Vue({
 
 
             // Sort by alphabetical order
-            searchlesson = searchlesson.sort((a, b) => {
+            searchproduct = searchproduct.sort((a, b) => {
                 if (this.sortBy == 'location') {
                     let fa = a.location.toLowerCase(), fb = b.location.toLowerCase()
 
@@ -154,13 +150,22 @@ var app = new Vue({
 
             // Show sorted array in descending or ascending order
             if (!this.ascending) {
-                searchlesson.reverse()
+                searchproduct.reverse()
             }
 
-            return searchlesson
+            return searchproduct
         }
     },
-    mounted: function () {
-        this.productsFetch();
+    created: function () {
+        // replace the URL to your Heroku app and route
+        fetch('https://deepwebapp.herokuapp.com/collection/products').then(
+            function (response) {
+                response.json().then(
+                    function (json) {
+                        res.header({ "Access-Control-Allow-Origin": "*" });
+                        // note that we used 'store.product' instead of 'this.product'
+                        app.product = json;
+                    });
+            })
     }
 })

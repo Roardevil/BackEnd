@@ -1,11 +1,12 @@
 //Import the express and url modules
 let express = require('express');
 let url = require("url");
+var cors = require('cors')
 
 const port = process.env.PORT || 3000
 //The express module is a function. When it is executed it returns an app object
 let app = express();
-
+app.use(cors())
 app.use(express.static("public"));
 
 
@@ -18,6 +19,13 @@ app.use(function (request, response, next) { // middleware
 
     next();
     // response.end("Hello, world!");
+});
+app.use(function (req, res, next) {
+    // allow different IP address
+    res.header({ "Access-Control-Allow-Origin": "*" });
+    // allow different header fields
+    res.header({ "Access-Control-Allow-Origin": "*" });
+    next();
 });
 
 
