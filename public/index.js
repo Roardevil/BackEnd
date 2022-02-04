@@ -162,7 +162,6 @@ var app = new Vue({
             function (response) {
                 response.json().then(
                     function (json) {
-                        res.header({ "Access-Control-Allow-Origin": "*" });
                         // note that we used 'store.product' instead of 'this.product'
                         app.product = json;
                     });
