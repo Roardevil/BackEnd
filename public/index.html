@@ -91,7 +91,7 @@
             <h4>
                 <strong>Enter Your Information</strong>
             </h4>
-            <div v-if=" cartCount(index)" v-for="(product,index) in getproduct" :key="index">
+            <div v-if=" cartCount(index)>0" v-for="(product,index) in getproduct" :key="index">
 
                 <img v-bind:src="product.image" height="200" width="300">
                 <p>subject: {{ product.subject }}</p>
@@ -108,27 +108,21 @@
                 <button v-on:click="removeButton(index)">Remove </button>
 
 
-                <span v-for='n in product.rating'>★
-                </span>
-                <span v-for='n in 5-product.rating'>☆</span>
+
+
+
+
+
+                <form>
+                    <label for="Name">Name:</label>
+                    <input v-model="name" id="name" required><br><br>
+                    <label for="Phonenumber">Phonenumber:</label>
+                    <input v-model="Phonenumber" id="Phonenumber" required><br><br>
+                    <button :disabled="formisvalid" @click="submitform">submit</button>
+
+                </form>
             </div>
-
-
-
-
-
-
-
-            <form>
-                <label for="Name">Name:</label>
-                <input v-model="name" id="name" required><br><br>
-                <label for="Phonenumber">Phonenumber:</label>
-                <input v-model="Phonenumber" id="Phonenumber" required><br><br>
-                <button :disabled="formisvalid" @click="submitform">submit</button>
-
-            </form>
         </div>
-    </div>
     </div>
 </body>
 

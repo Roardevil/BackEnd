@@ -41,7 +41,7 @@ var app = new Vue({
             this.showproduct = this.showproduct ? false : true;
         },
         canaddtocart(aproduct) {
-            console.log("iuhiyheiuh   " + this.product[aproduct].space + "yuguyguy  " + aproduct);
+            console.log("iuhiyheiuh   " + this.products[aproduct].space + "yuguyguy  " + aproduct);
 
             return this.product[aproduct].space > 4;
         },
