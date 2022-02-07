@@ -1,7 +1,9 @@
 //Import the express and url modules
+const { json } = require('body-parser');
 let express = require('express');
 let url = require("url");
 var cors = require('cors')
+
 
 const port = process.env.PORT || 3000
 //The express module is a function. When it is executed it returns an app object

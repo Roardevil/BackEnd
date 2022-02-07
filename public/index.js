@@ -1,3 +1,4 @@
+
 var app = new Vue({
     el: "#vueapp",
     data: {
@@ -22,19 +23,7 @@ var app = new Vue({
 
     },
     methods: {
-        async submitForm() {
-            const res = await fetch('https://deepwebapp.herokuapp.com/collection/orderinfo', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
 
-                // pass in the information from our form
-                body: JSON.stringify({
-                    name: this.name,
-                    Phonenumber: this.Phonenumber,
-                })
-            }
-            )
-        },
 
 
 
