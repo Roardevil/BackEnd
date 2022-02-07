@@ -6,7 +6,7 @@ let app = new Vue({
         ascending: true,
         sortBy: 'location',
 
-        //    messageCheckout: "",
+        messageCheckout: "",
         searchValue: '',
         order: {
             name: "",
@@ -29,28 +29,25 @@ let app = new Vue({
     methods: {
         async submitform() {
 
-            const submitform = { name: this.order.name, Phonenumber: this.order.Phonenumber }
+            const submitform = []
+            for (let j = 0; j < this.product.length; j++) {
+                if (this.cartCount(this.product[j].id) > 0)
+                    submitform.push({ name: this.order.name, Phonenumber: this.order.Phonenumber, productId: this.product[j].id, stock: this.cartCount(this.product[j].id) })
+            }
+            console.log(submitform);
 
 
-
-            fetch('https://deepwebapp.herokuapp.com/collection/orderinfo', {
+            const response = await fetch('/collection/orderinfo', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
+                    'Content-Type': 'application/json'
                 },
-
-                // pass in the information from our form
                 body: JSON.stringify(submitform)
             })
+            console.log(await response.text())
 
-                .then(response => response.json())
-                .then(responseJSON => {
-                    console.log('Success:'
-                        , responseJSON);
-                });
 
-            // this.messageCheckout = "Order Placed";
+            this.messageCheckout = "Order Placed";
             console.log("sucess")
 
 

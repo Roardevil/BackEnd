@@ -8,7 +8,7 @@
     "nodemon": "^2.0.15"
   },
   "scripts": {
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "name": "backend",
   "version": "1.0.0",
