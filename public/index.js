@@ -22,6 +22,21 @@ var app = new Vue({
 
     },
     methods: {
+        async submitForm() {
+            const res = await fetch('https://deepwebapp.herokuapp.com/collection/orderinfo', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+
+                // pass in the information from our form
+                body: JSON.stringify({
+                    name: this.name,
+                    Phonenumber: this.Phonenumber,
+                })
+            }
+            )
+        },
+
+
 
         additem(id) {
             if (this.product[id].space > 0) {
