@@ -133,3 +133,6 @@ app.use('/'
 //Start the app listening on port 8080
 app.listen(port);
 
+async function handleProductGet(request, response) {
+
+}

@@ -1,5 +1,4 @@
-
-var app = new Vue({
+let app = new Vue({
     el: "#vueapp",
     data: {
         product: [],
@@ -7,10 +6,15 @@ var app = new Vue({
         ascending: true,
         sortBy: 'location',
 
-
+        //    messageCheckout: "",
         searchValue: '',
-        name: null,
-        Phonenumber: null,
+        order: {
+            name: "",
+            Phonenumber: "",
+        },
+
+
+
 
 
 
@@ -23,6 +27,36 @@ var app = new Vue({
 
     },
     methods: {
+        async submitform() {
+
+            const submitform = { name: this.order.name, Phonenumber: this.order.Phonenumber }
+
+
+
+            fetch('https://deepwebapp.herokuapp.com/collection/orderinfo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+
+                // pass in the information from our form
+                body: JSON.stringify(submitform)
+            })
+
+                .then(response => response.json())
+                .then(responseJSON => {
+                    console.log('Success:'
+                        , responseJSON);
+                });
+
+            // this.messageCheckout = "Order Placed";
+            console.log("sucess")
+
+
+
+
+        },
 
 
 
@@ -60,21 +94,8 @@ var app = new Vue({
         },
 
 
-        submitForm() {
-            alert('Submitted');
-        },
-        submitform() {
 
-            if (this.formisvalid) {
-                console.log("sucess")
 
-            }
-            else {
-                console.log("failed")
-
-            }
-
-        },
         removeButton(index) {
             this.product[index].space++;
             for (let i = 0; i < this.cart.length; i++) {
@@ -100,15 +121,14 @@ var app = new Vue({
         cartItemCount() {
             return this.cart.length || '';
         },
-        nameisvalid() {
-            return typeof this.name === 'text' && this.name.length < 3
 
-        },
-        Phonenumberisvalid() {
-            return typeof this.Phonenumber === 'number' && this.Phonenumber.length >= 10;
-        },
         formisvalid: function () {
-            return this.nameisvalid && this.Phonenumberisvalid;
+            if (this.order.name.match(/[A-Za-z]/) && this.order.Phonenumber.match(/[0-9]/) && this.order.Phonenumber.length >= 10) {
+
+                return false;
+            }
+            else
+                return true;
 
         },
 

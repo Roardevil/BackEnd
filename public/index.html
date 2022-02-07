@@ -3,7 +3,7 @@
 
 <head>
     <title>Vue.js Pet Depot</title>
-    <script src="https://unpkg.com/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -111,15 +111,28 @@
 
 
 
+                <form @submit.prevent="submitform">
+
+                    <h2>Checkout</h2>
+                    <p>
+                        <strong>Name:</strong>
+                        <!-- This input field is bound to 'firstName' in the 'order' object -->
+                        <input v-model="order.name" />
+                    </p>
+                    <p>
+                        <strong>Phonenumber:</strong>
+                        <!-- This input field is bound to 'lastName' in the 'order' object -->
+                        <input v-model="order.Phonenumber" />
+                    </p>
 
 
+                    <h2>Order Information</h2>
+                    <p>Name: {{order.name}}</p>
+                    <p>Phonenumber: {{order.Phonenumber}}</p>
 
-                <form>
-                    <label for="Name">Name:</label>
-                    <input v-model="name" id="name" required><br><br>
-                    <label for="Phonenumber">Phonenumber:</label>
-                    <input v-model="Phonenumber" id="Phonenumber" required><br><br>
-                    <button :disabled="formisvalid" @click="submitform">submit</button>
+
+                    <button :disabled="formisvalid">submit</button>
+                    <!-- <p> {{messageCheckout}}</p> -->
 
                 </form>
             </div>
@@ -127,8 +140,8 @@
     </div>
 </body>
 
-
 <script src="index.js"></script>
+
 
 
 
