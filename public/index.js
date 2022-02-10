@@ -58,6 +58,7 @@ let app = new Vue({
 
 
 
+
         additem(id) {
             if (this.product[id].space > 0) {
                 --this.product[id].space;
