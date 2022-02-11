@@ -32,7 +32,7 @@ let app = new Vue({
             const submitform = []
             for (let j = 0; j < this.product.length; j++) {
                 if (this.cartCount(this.product[j].id) > 0)
-                    submitform.push({ name: this.order.name, Phonenumber: this.order.Phonenumber, productId: this.product[j].id, space: this.product.space - this.cartCount(this.product[j].id) })
+                    submitform.push({ name: this.order.name, Phonenumber: this.order.Phonenumber, productId: this.product[j].id, space: this.product[j].id - this.cartCount(this.product[j].id) })
             }
             console.log(submitform);
 
