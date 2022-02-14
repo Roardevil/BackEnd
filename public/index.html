@@ -92,7 +92,7 @@
             <h4>
                 <strong>Enter Your Information</strong>
             </h4>
-            <div v-if=" cartCount(index)>0" v-for="(product,index) in getproduct" :key="index">
+            <div v-if=" cartCount(index)>0" v-for="(product,index) in product" :key="index">
 
                 <img v-bind:src="product.image" height="200" width="300">
                 <p>subject: {{ product.subject }}</p>
