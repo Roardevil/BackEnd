@@ -172,19 +172,67 @@ let app = new Vue({
                 return true;
 
         },
+        getproduct() {
 
+            let searchproduct = this.product
 
-
-        created: function () {
-            // replace the URL to your Heroku app and route
-            fetch('https://deepwebapp.herokuapp.com/collection/products').then(
-                function (response) {
-                    response.json().then(
-                        function (json) {
-                            // note that we used 'store.product' instead of 'this.product'
-                            app.product = json;
-                        });
+            // Process search input
+            if (this.searchValue != '' && this.searchValue) {
+                searchproduct = searchproduct.filter((product) => {
+                    return product.subject
+                        .toLowerCase()
+                        .includes(this.searchValue.toLowerCase())
                 })
+            }
+
+
+
+            // Sort by alphabetical order
+            searchproduct = searchproduct.sort((a, b) => {
+                if (this.sortBy == 'location') {
+                    let fa = a.location.toLowerCase(), fb = b.location.toLowerCase()
+
+                    if (fa < fb) {
+                        return -1
+                    }
+                    if (fa > fb) {
+                        return 1
+                    }
+                    return 0
+
+
+                } else if (this.sortBy == 'price') {
+                    return a.price - b.price
+                }
+
+
+                else if (this.sortBy == 'space') {
+                    return a.space - b.space
+                }
+            })
+
+
+            // Show sorted array in descending or ascending order
+            if (!this.ascending) {
+                searchproduct.reverse()
+            }
+
+            return searchproduct
         }
+    },
+
+
+
+    created: function () {
+        // replace the URL to your Heroku app and route
+        fetch('https://deepwebapp.herokuapp.com/collection/products').then(
+            function (response) {
+                response.json().then(
+                    function (json) {
+                        // note that we used 'store.product' instead of 'this.product'
+                        app.product = json;
+                    });
+            })
     }
+
 })
