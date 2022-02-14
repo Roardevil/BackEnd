@@ -32,7 +32,7 @@ let app = new Vue({
             const submitform = []
             for (let j = 0; j < this.product.length; j++) {
                 if (this.cartCount(this.product[j].id) > 0)
-                    submitform.push({ name: this.order.name, Phonenumber: this.order.Phonenumber, productId: this.product[j].id, space: this.product[j].id - this.cartCount(this.product[j].id) })
+                    submitform.push({ name: this.order.name, Phonenumber: this.order.Phonenumber, productId: this.product[j].id, space: this.cartCount(this.product[j].id) })
             }
             console.log(submitform);
 
@@ -66,6 +66,28 @@ let app = new Vue({
 
                 this.cart.push(id);
             }
+
+            fetch('https://deepwebapp.herokuapp.com/collection/products' + this.product[Space]._id, {
+
+                method: 'PUT', //Set the HTTP method as 'PUT'
+
+                headers: {
+
+                    'Content-Type': 'application/json', //Set the data type as JSON
+
+                },
+
+                body: JSON.stringify({ "space": this.counter(product) }), //Need to stringify the JSON object
+
+            }) //chnage
+
+                .then(response => response.json())
+
+                .then(responseJSON => {
+
+                    console.log('Success:', responseJSON);  //Retuns the message of success.
+
+                });
         },
         isdisable(cet) {
             return this.product[cet].space === 0;
