@@ -56,7 +56,7 @@
 
 
         <div v-if="showproduct">
-            <div v-for="(product,count) in getproduct" :key="count">
+            <div v-for="(product,count) in product" :key="count">
                 <img v-bind:src="product.image" height="200" width="300">
                 <p>subject: {{ product.subject}}</p>
                 <!--Get data from object using v-text-->
