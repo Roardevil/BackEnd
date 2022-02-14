@@ -59,7 +59,7 @@ let app = new Vue({
 
 
 
-        additem(id) {
+        additem(id, space) {
             if (this.product[id].space > 0) {
                 --this.product[id].space;
 
@@ -67,7 +67,7 @@ let app = new Vue({
                 this.cart.push(id);
             }
 
-            fetch('https://deepwebapp.herokuapp.com/collection/products' + this.product[Space]._id, {
+            fetch('https://deepwebapp.herokuapp.com/collection/products' + this.product[space]._id, {
 
                 method: 'PUT', //Set the HTTP method as 'PUT'
 
