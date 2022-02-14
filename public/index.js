@@ -27,6 +27,27 @@ let app = new Vue({
 
     },
     methods: {
+        searchproduct: async function () {
+
+            let searchUrl = "/collection/:collectionName/" + this.searchValue;
+            console.log("url:" + searchUrl);
+
+            try {
+
+                let searchResult = await axios.get(searchUrl);
+
+                this.product = searchResult.data.data;
+                this.numberofproduct = searchResult.data.count;
+                console.log("url:" + this.numberofproduct);
+
+            } catch (ex) {
+                console.error("error fetching data from server:" + ex)
+            }
+            document.getElementById("TestsDiv").style.display = "";
+            document.getElementById("dic").style.display = "";
+            document.getElementById("dd").style.display = "";
+
+        },
         async submitform() {
 
             const submitform = []
