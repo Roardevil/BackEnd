@@ -174,20 +174,6 @@ let app = new Vue({
         },
 
         getproduct() {
-
-            let searchproduct = this.product
-
-            // Process search input
-            if (this.searchValue != '' && this.searchValue) {
-                searchproduct = searchproduct.filter((product) => {
-                    return product.subject
-                        .toLowerCase()
-                        .includes(this.searchValue.toLowerCase())
-                })
-            }
-
-
-
             // Sort by alphabetical order
             searchproduct = searchproduct.sort((a, b) => {
                 if (this.sortBy == 'location') {
