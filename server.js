@@ -83,13 +83,12 @@ app.get('/collection/:collectionName'
             res.send(results)
         })
     })
-app.get('/collection/:collectionName/:id'
-    , (req, res) => {
-        req.collection.find({}).toArray((e, results) => {
-            if (e) return next(e)
-            res.send(results)
-        })
+app.get('/collection/:collectionName/:id', (req, res) => {
+    req.collection.find({}).toArray((e, results) => {
+        if (e) return next(e)
+        res.send(results)
     })
+})
 
 app.get('/collection/:collectionName/:searchTerm'
     , (req, res) => {
