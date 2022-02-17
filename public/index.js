@@ -21,7 +21,7 @@ let app = new Vue({
 
     },
     methods: {
-        async searchproduct() {
+        searchproduct: async function () {
             if (this.filter != "") {
                 this.product = null;
                 response = await fetch("https://deepwebapp.herokuapp.com/collection/products" + this.filter);
@@ -159,7 +159,6 @@ let app = new Vue({
         getproduct() {
 
             let searchproduct = this.product
-
 
 
 
