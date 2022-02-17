@@ -107,7 +107,7 @@
 
 
 
-                <button v-on:click="removeButton(index)">Remove </button>
+                <button class="btn btn-success" v-on:click="removeButton(index)">Remove </button>
 
 
 
@@ -130,7 +130,7 @@
                     <h2>Order Information</h2>
                     <p>Name: {{order.name}}</p>
                     <p>Phonenumber: {{order.Phonenumber}}</p>
-                    <button :disabled="formisvalid">submit</button>
+                    <button class="btn btn-success" :disabled="formisvalid">submit</button>
                     <p><b> {{messageCheckout}}</p></b>
 
                 </form>
