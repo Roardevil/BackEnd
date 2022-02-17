@@ -7,6 +7,7 @@ let app = new Vue({
         sortBy: 'location',
         messageCheckout: "",
         searchValue: '',
+        searchproduct: '',
         order: {
             name: "",
             Phonenumber: "",
