@@ -162,12 +162,12 @@ let app = new Vue({
         },
         getproduct() {
 
-            let searchproduct = this.product
+            let product = this.product
 
 
 
             // Sort by alphabetical order
-            searchproduct = product.sort((a, b) => {
+            product = product.sort((a, b) => {
                 if (this.sortBy == 'location') {
                     let fa = a.location.toLowerCase(), fb = b.location.toLowerCase()
 
@@ -193,10 +193,10 @@ let app = new Vue({
 
             // Show sorted array in descending or ascending order
             if (!this.ascending) {
-                searchproduct.reverse()
+                product.reverse()
             }
 
-            return searchproduct
+            return product
         }
     },
 
