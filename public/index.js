@@ -25,14 +25,16 @@ let app = new Vue({
         searchproduct: async function () {
             if (this.filter != "") {
                 this.product = null;
-                response = await fetch("https://deepwebapp.herokuapp.com/collection/products" + this.filter);
+                response = await fetch("https://deepwebapp.herokuapp.com/collection/products" + this.filter).then(
+                    function (response) {
+                        response.json().then(
+                            function (json) {
+                                // note that we used 'store.product' instead of 'this.product'
+                                app.products = json;
+                            });
+                    })
+            }
 
-            }
-            else {
-                response = await fetch("https://deepwebapp.herokuapp.com/collection/products");
-            }
-            const data = await response.json();
-            this.product = data;
         },
 
         async submitform() {
