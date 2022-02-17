@@ -159,58 +159,20 @@ let app = new Vue({
                 return true;
 
         },
-        getproduct() {
-
-            let searchValue = this.product
 
 
 
-            // Sort by alphabetical order
-            searchValue = product.sort((a, b) => {
-                if (this.sortBy == 'location') {
-                    let fa = a.location.toLowerCase(), fb = b.location.toLowerCase()
-
-                    if (fa < fb) {
-                        return -1
-                    }
-                    if (fa > fb) {
-                        return 1
-                    }
-                    return 0
-
-
-                } else if (this.sortBy == 'price') {
-                    return a.price - b.price
-                }
-
-
-                else if (this.sortBy == 'space') {
-                    return a.space - b.space
-                }
-            })
-
-
-            // Show sorted array in descending or ascending order
-            if (!this.ascending) {
-                searchValue.reverse()
-            }
-
-            return searchValue
+        created: function () {
+            // replace the URL to your Heroku app and route
+            fetch('https://deepwebapp.herokuapp.com/collection/products').then(
+                function (response) {
+                    response.json().then(
+                        function (json) {
+                            // note that we used 'store.product' instead of 'this.product'
+                            app.product = json;
+                        });
+                })
         }
-    },
-
-
-
-    created: function () {
-        // replace the URL to your Heroku app and route
-        fetch('https://deepwebapp.herokuapp.com/collection/products').then(
-            function (response) {
-                response.json().then(
-                    function (json) {
-                        // note that we used 'store.product' instead of 'this.product'
-                        app.product = json;
-                    });
-            })
     }
 
 })
