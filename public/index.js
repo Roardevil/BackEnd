@@ -1,7 +1,7 @@
 let app = new Vue({
     el: "#vueapp",
     data: {
-        product: {},
+        product: [],
         showproduct: true,
         ascending: true,
         sortBy: 'location',
