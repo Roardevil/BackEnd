@@ -28,7 +28,11 @@ let app = new Vue({
                 response = await fetch("https://deepwebapp.herokuapp.com/collection/products" + this.filter);
 
             }
-
+            else {
+                response = await fetch("https://deepwebapp.herokuapp.com/collection/products");
+            }
+            const data = await response.json();
+            this.product = data;
         },
 
         async submitform() {
