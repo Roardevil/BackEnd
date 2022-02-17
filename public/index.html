@@ -57,7 +57,7 @@
 
 
         <div v-if="showproduct">
-            <div v-for="(product,count) in products" :key="count">
+            <div v-for="(product,count) in product" :key="count">
                 <img v-bind:src="product.image" height="200" width="300">
                 <p>subject: {{ product.subject}}</p>
                 <!--Get data from object using v-text-->
@@ -93,7 +93,7 @@
             <h4>
                 <strong>Enter Your Information</strong>
             </h4>
-            <div v-if=" cartCount(index)>0" v-for="(product,index) in products" :key="index">
+            <div v-if=" cartCount(index)>0" v-for="(product,index) in product" :key="index">
 
                 <img v-bind:src="product.image" height="200" width="300">
                 <p>subject: {{ product.subject }}</p>
