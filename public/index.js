@@ -155,7 +155,7 @@ let app = new Vue({
 
             if (this.filter != "") {
                 this.product = null;
-                response = await fetch("https://deepwebapp.herokuapp.com/collection/products" + this.filter);
+                fetch("https://deepwebapp.herokuapp.com/collection/products" + this.filter);
 
             }
 
