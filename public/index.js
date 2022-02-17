@@ -7,7 +7,7 @@ let app = new Vue({
         sortBy: 'location',
         messageCheckout: "",
         searchValue: '',
-        searchproduct: '',
+
         order: {
             name: "",
             Phonenumber: "",
@@ -160,6 +160,13 @@ let app = new Vue({
         getproduct() {
 
             let searchproduct = this.product
+            if (this.searchValue != '' && this.searchValue) {
+                searchproduct = searchproduct.filter((product) => {
+                    return product.subject
+                        .toLowerCase()
+                        .includes(this.searchValue.toLowerCase())
+                })
+            }
 
 
 
