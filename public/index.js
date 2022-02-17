@@ -2,7 +2,7 @@ let app = new Vue({
     el: "#vueapp",
     data: {
         product: {},
-        // showproduct: true,
+        showproduct: true,
         ascending: true,
         sortBy: 'location',
         messageCheckout: "",
