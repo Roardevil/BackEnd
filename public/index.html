@@ -35,7 +35,7 @@
                 <i v-if="ascending" class="glyphicon glyphicon-sort"></i>
                 <i v-else class="glyphicon glyphicon-sort"></i>
             </button> &nbsp &nbsp
-            <input type="text" @keyup="searchproducts" v-model="searchValue" placeholder="Search product"
+            <input type="text" @keyup="searchproduct" v-model="searchValue" placeholder="Search product"
                 id="search-input"></input>
             <i class="fa fa-search"></i>
             &nbsp &nbsp
@@ -57,15 +57,15 @@
 
 
         <div v-if="showproduct">
-            <div v-for="(products,count) in products" :key="count">
-                <img v-bind:src="products.image" height="200" width="300">
-                <p>subject: {{ products.subject}}</p>
+            <div v-for="(products,count) in product" :key="count">
+                <img v-bind:src="product.image" height="200" width="300">
+                <p>subject: {{ product.subject}}</p>
                 <!--Get data from object using v-text-->
-                <p>Location: {{ products.location }}</p>
+                <p>Location: {{ product.location }}</p>
                 <!--Get data from object-->
-                <p>Price: {{ products.price }}</p>
+                <p>Price: {{ product.price }}</p>
                 <!--Get data from object-->
-                <p>space: {{ products.space }}</p>
+                <p>space: {{ product.space }}</p>
                 <!--Get data from object-->
 
 
@@ -93,14 +93,14 @@
             <h4>
                 <strong>Enter Your Information</strong>
             </h4>
-            <div v-if=" cartCount(index)>0" v-for="(products,index) in products" :key="index">
+            <div v-if=" cartCount(index)>0" v-for="(product,index) in product" :key="index">
 
-                <img v-bind:src="products.image" height="200" width="300">
-                <p>subject: {{ products.subject }}</p>
+                <img v-bind:src="product.image" height="200" width="300">
+                <p>subject: {{ product.subject }}</p>
                 <!--Get data from object using v-text-->
-                <p>Location: {{ products.location }}</p>
+                <p>Location: {{ product.location }}</p>
                 <!--Get data from object-->
-                <p>Price: {{ products.price }}</p>
+                <p>Price: {{ product.price }}</p>
                 <!--Get data from object-->
                 <p>space: {{ cartCount(index) }}</p>
                 <!--Get data from object-->
