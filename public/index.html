@@ -35,7 +35,7 @@
                 <i v-if="ascending" class="glyphicon glyphicon-sort"></i>
                 <i v-else class="glyphicon glyphicon-sort"></i>
             </button> &nbsp &nbsp
-            <input type="text" @keyup="searchproduct" v-model="searchValue" placeholder="Search product"
+            <input type="text" @keyup="getproduct" v-model="searchValue" placeholder="Search product"
                 id="search-input"></input>
             <i class="fa fa-search"></i>
             &nbsp &nbsp
@@ -57,7 +57,7 @@
 
 
         <div v-if="showproduct">
-            <div v-for="(products,count) in getproduct" :key="count">
+            <div v-for="(product,count) in getproduct" :key="count">
                 <img v-bind:src="product.image" height="200" width="300">
                 <p>subject: {{ product.subject}}</p>
                 <!--Get data from object using v-text-->

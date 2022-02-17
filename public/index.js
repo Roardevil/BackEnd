@@ -21,15 +21,7 @@ let app = new Vue({
 
     },
     methods: {
-        searchproduct: async function () {
-            if (this.filter != "") {
-                this.product = null;
-                response = await fetch("https://deepwebapp.herokuapp.com/collection/products" + this.filter);
 
-            }
-
-
-        },
         async submitform() {
 
             const submitform = []
@@ -161,7 +153,11 @@ let app = new Vue({
             let searchproduct = this.product
 
 
+            if (this.filter != "") {
+                this.product = null;
+                response = await fetch("https://deepwebapp.herokuapp.com/collection/products" + this.filter);
 
+            }
 
 
             // Sort by alphabetical order
