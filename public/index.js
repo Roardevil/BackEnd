@@ -1,7 +1,7 @@
 let app = new Vue({
     el: "#vueapp",
     data: {
-        product: {},
+        products: {},
         showproduct: true,
         ascending: true,
         sortBy: 'location',
@@ -26,10 +26,10 @@ let app = new Vue({
 
     },
     methods: {
-        searchproduct: async function () {
+        searchproducts: async function () {
             if (this.filter != "") {
-                this.product = null;
-                response = await fetch("https://deepwebapp.herokuapp.com/collection/products" + this.filter);
+                this.products = null;
+                response = await fetch("https://deepwebapp.herokuapp.com/collection/productss" + this.filter);
 
             }
 
@@ -38,9 +38,9 @@ let app = new Vue({
         async submitform() {
 
             const submitform = []
-            for (let j = 0; j < this.product.length; j++) {
-                if (this.cartCount(this.product[j].id) > 0)
-                    submitform.push({ name: this.order.name, Phonenumber: this.order.Phonenumber, productId: this.product[j].id, space: this.cartCount(this.product[j].id) })
+            for (let j = 0; j < this.products.length; j++) {
+                if (this.cartCount(this.products[j].id) > 0)
+                    submitform.push({ name: this.order.name, Phonenumber: this.order.Phonenumber, productsId: this.products[j].id, space: this.cartCount(this.products[j].id) })
             }
             console.log(submitform);
 
@@ -68,14 +68,14 @@ let app = new Vue({
 
 
         additem(id, space) {
-            if (this.product[id].space > 0) {
-                --this.product[id].space;
+            if (this.products[id].space > 0) {
+                --this.products[id].space;
 
 
                 this.cart.push(id);
             }
 
-            fetch('https://deepwebapp.herokuapp.com/collection/products' + this.product[space].id, {
+            fetch('https://deepwebapp.herokuapp.com/collection/productss' + this.products[space].id, {
 
                 method: 'PUT', //Set the HTTP method as 'PUT'
 
@@ -85,7 +85,7 @@ let app = new Vue({
 
                 },
 
-                body: JSON.stringify({ "space": this.counter(product) }), //Need to stringify the JSON object
+                body: JSON.stringify({ "space": this.counter(products) }), //Need to stringify the JSON object
 
             }) //chnage
 
@@ -98,18 +98,18 @@ let app = new Vue({
                 });
         },
         isdisable(cet) {
-            return this.product[cet].space === 0;
+            return this.products[cet].space === 0;
 
         },
 
 
         showcheckout() {
-            this.showproduct = this.showproduct ? false : true;
+            this.showproducts = this.showproducts ? false : true;
         },
-        canaddtocart(aproduct) {
-            console.log("iuhiyheiuh   " + this.products[aproduct].space + "yuguyguy  " + aproduct);
+        canaddtocart(aproducts) {
+            console.log("iuhiyheiuh   " + this.productss[aproducts].space + "yuguyguy  " + aproducts);
 
-            return this.product[aproduct].space > 4;
+            return this.products[aproducts].space > 4;
         },
         cartCount(id) {
             let count = 0;
@@ -125,7 +125,7 @@ let app = new Vue({
 
 
         removeButton(index) {
-            this.product[index].space++;
+            this.products[index].space++;
             for (let i = 0; i < this.cart.length; i++) {
                 if (this.cart[i] == index) {
                     this.cart.splice(i, 1);
@@ -164,12 +164,12 @@ let app = new Vue({
 
         created: function () {
             // replace the URL to your Heroku app and route
-            fetch('https://deepwebapp.herokuapp.com/collection/products').then(
+            fetch('https://deepwebapp.herokuapp.com/collection/productss').then(
                 function (response) {
                     response.json().then(
                         function (json) {
-                            // note that we used 'store.product' instead of 'this.product'
-                            app.product = json;
+                            // note that we used 'store.products' instead of 'this.products'
+                            app.products = json;
                         });
                 })
         }
