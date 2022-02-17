@@ -5,7 +5,6 @@ let app = new Vue({
         showproduct: true,
         ascending: true,
         sortBy: 'location',
-        filter="",
         messageCheckout: "",
         searchValue: '',
         order: {
