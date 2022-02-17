@@ -5,7 +5,7 @@ let app = new Vue({
         showproduct: true,
         ascending: true,
         sortBy: 'location',
-
+        filter="",
         messageCheckout: "",
         searchValue: '',
         order: {
@@ -28,24 +28,12 @@ let app = new Vue({
     },
     methods: {
         searchproduct: async function () {
+            if (this.filter != "") {
+                this.product = null;
+                response = await fetch("https://deepwebapp.herokuapp.com/collection/products" + this.filter);
 
-            let searchUrl = "/collection/:collectionName/" + this.searchValue;
-            console.log("url:" + searchUrl);
-
-            try {
-
-                let searchResult = await axios.get(searchUrl);
-
-                this.product = searchResult.data.data;
-                this.numberofproduct = searchResult.data.count;
-                console.log("url:" + this.numberofproduct);
-
-            } catch (ex) {
-                console.error("error fetching data from server:" + ex)
             }
-            document.getElementById("TestsDiv").style.display = "";
-            document.getElementById("dic").style.display = "";
-            document.getElementById("dd").style.display = "";
+
 
         },
         async submitform() {
@@ -176,19 +164,10 @@ let app = new Vue({
 
             let searchproduct = this.product
 
-            // Process search input
-            if (this.searchValue != '' && this.searchValue) {
-                searchproduct = searchproduct.filter((product) => {
-                    return product.subject
-                        .toLowerCase()
-                        .includes(this.searchValue.toLowerCase())
-                })
-            }
-
 
 
             // Sort by alphabetical order
-            searchproduct = searchproduct.sort((a, b) => {
+            searchproduct = product.sort((a, b) => {
                 if (this.sortBy == 'location') {
                     let fa = a.location.toLowerCase(), fb = b.location.toLowerCase()
 

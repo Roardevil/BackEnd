@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Vue.js Pet Depot</title>
+    <title>Web Based App</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
         integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -35,7 +35,8 @@
                 <i v-if="ascending" class="glyphicon glyphicon-sort"></i>
                 <i v-else class="glyphicon glyphicon-sort"></i>
             </button> &nbsp &nbsp
-            <input type="text" v-model="searchValue" placeholder="Search product" id="search-input"></input>
+            <input type="text" @keyup="searchproduct" v-model="searchValue" placeholder="Search product"
+                id="search-input"></input>
             <i class="fa fa-search"></i>
             &nbsp &nbsp
 
