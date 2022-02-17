@@ -21,6 +21,14 @@ let app = new Vue({
 
     },
     methods: {
+        async searchproduct() {
+            if (this.filter != "") {
+                this.product = null;
+                response = await fetch("https://deepwebapp.herokuapp.com/collection/products" + this.filter);
+
+            }
+
+        },
 
         async submitform() {
 
@@ -153,11 +161,6 @@ let app = new Vue({
             let searchproduct = this.product
 
 
-            if (this.filter != "") {
-                this.product = null;
-                fetch("https://deepwebapp.herokuapp.com/collection/products" + this.filter);
-
-            }
 
 
             // Sort by alphabetical order
