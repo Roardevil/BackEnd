@@ -12,11 +12,6 @@ let app = new Vue({
             Phonenumber: "",
         },
 
-
-
-
-
-
         cart: [],
 
 
@@ -170,7 +165,7 @@ let app = new Vue({
 
 
             // Sort by alphabetical order
-            searchproduct = product.sort((a, b) => {
+            searchproduct = searchproduct.sort((a, b) => {
                 if (this.sortBy == 'location') {
                     let fa = a.location.toLowerCase(), fb = b.location.toLowerCase()
 
