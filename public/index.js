@@ -170,7 +170,7 @@ let app = new Vue({
 
 
             // Sort by alphabetical order
-            searchproduct = searchproduct.sort((a, b) => {
+            searchproduct = product.sort((a, b) => {
                 if (this.sortBy == 'location') {
                     let fa = a.location.toLowerCase(), fb = b.location.toLowerCase()
 
