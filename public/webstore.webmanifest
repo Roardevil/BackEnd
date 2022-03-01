@@ -4,7 +4,7 @@
     "description":"Deep WebStore",
     "icons":[
         {
-            "src":"Logo.png",
+            "src":"images/Logo.png",
             "sizes":"512x512",
             "type":"image/PNG"
         }
