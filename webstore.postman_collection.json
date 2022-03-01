@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "c8d8f9f4-ce1a-40a6-aaf2-00b29039a690",
+		"name": "webstore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Retrive products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://deepwebapp.herokuapp.com/collection/products",
+					"protocol": "https",
+					"host": [
+						"deepwebapp",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"collection",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post products",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"id\": \"007\",\r\n        \"subject\": \"\",\r\n        \"location\": \"bath\",\r\n        \"price\": 150,\r\n        \"space\": 10,\r\n        \"image\": \"../images/dance.jpg\"\r\n\r\n\r\n\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://deepwebapp.herokuapp.com/collection/products",
+					"protocol": "https",
+					"host": [
+						"deepwebapp",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"collection",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "put request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
