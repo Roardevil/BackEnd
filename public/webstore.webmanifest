@@ -4,9 +4,9 @@
     "description":"Deep WebStore",
     "icons":[
         {
-            "src":"images/Logo.jpg",
+            "src":"images/Logo.png",
             "sizes":"512x512",
-            "type":"image/jpg"
+            "type":"image/PNG"
         }
     ],
     "start_url":"index.html",
