@@ -6,6 +6,7 @@ var cacheFiles=[
     'webstore.webmanifest',
     'style.css'
     
+    
 ];
 
 self.addEventListener('install',(e) =>{
