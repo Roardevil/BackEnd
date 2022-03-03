@@ -46,6 +46,7 @@ MongoClient.connect("mongodb+srv://Deep:deep@cluster0.u72p7.mongodb.net/"
 app.param('collectionName'
     , (req, res, next, collectionName) => {
         req.collection = db.collection(collectionName)
+        
         // console.log('collection name:', req.collection)
         return next()
     });
