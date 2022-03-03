@@ -80,7 +80,7 @@ app.get('/collection/:collectionName/:searchTerm'
         console.log(req.params.searchTerm)
         var regex = new RegExp(req.params.searchTerm, "i");
         console.log(regex)
-        req.collection.find({location:regex}|| {subject: regex}).toArray((e, results) => {
+        req.collection.find({ subject: regex}||{location:regex}).toArray((e, results) => {
             if (e) return next(e)
             res.send(results)
             console.log(results)
