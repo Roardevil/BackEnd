@@ -178,16 +178,8 @@ let app = new Vue({
         }
     },
 
-    created: function () {
-        // replace the URL to your Heroku app and route
-        fetch('https://deepwebapp.herokuapp.com/collection/products').then(
-            function (response) {
-                response.json().then(
-                    function (json) {
-                        // note that we used 'store.product' instead of 'this.product'
-                        app.product = json;
-                    });
-            })
+    mounted: function () {
+        this. searchproduct();
     }
 
 
