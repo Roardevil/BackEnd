@@ -68,7 +68,6 @@ app.use("/images", function (request, response) {
 
 app.get('/collection/:collectionName'
     , (req, res) => {
-        console.log("yoyoy")
         req.collection.find({}).toArray((e, results) => {
             if (e) return next(e)
             res.send(results)
