@@ -6,7 +6,7 @@ let app = new Vue({
         ascending: true,
         sortBy: 'location',
         messageCheckout: "",
-        searchValue: '',
+        filter:"",
 
         order: {
             name: "",
@@ -16,27 +16,28 @@ let app = new Vue({
         cart: [],
 
 
-
+        components: {
+            Keypress: () => import('vue-keypress')
+          }
 
 
 
     },
     methods: {
         searchproduct: async function () {
-            console.log("rorororo");
-            if (this.filter != "") {
-                this.product = null;
-                response = await fetch("https://deepwebapp.herokuapp.com/collection/products" + this.filter).then(
-                    function (response) {
-                        response.json().then(
-                            function (json) {
-                                // note that we used 'store.product' instead of 'this.product'
-                                console.log(json)
-                                app.products = json;
-                            });
-                    })
+            let response ;
+            if(this.filter!="") {
+                this.product=null;
+           response =  await fetch("https://deepwebapp.herokuapp.com/collection/products/"+this.filter);
+           
+            }
+            else{
+            response = await fetch("https://deepwebapp.herokuapp.com/collection/products");
             }
 
+            const data = await response.json();
+            console.log(data);
+            app.product = data;
         },
 
         async submitform() {
@@ -177,16 +178,8 @@ let app = new Vue({
         }
     },
 
-    created: function () {
-        // replace the URL to your Heroku app and route
-        fetch('https://deepwebapp.herokuapp.com/collection/products').then(
-            function (response) {
-                response.json().then(
-                    function (json) {
-                        // note that we used 'store.product' instead of 'this.product'
-                        app.product = json;
-                    });
-            })
+    mounted: function () {
+        this. searchproduct();
     }
 
 
