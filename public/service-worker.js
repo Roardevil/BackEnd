@@ -5,8 +5,8 @@ var cacheFiles=[
     'service-worker.js',
     'webstore.webmanifest',
     'style.css',
-    'images/logo192.png',
-    'images/logo521.png'
+    'logo192.png',
+    'logo521.png'
 
 
     
