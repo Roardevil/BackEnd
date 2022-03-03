@@ -5,6 +5,7 @@ var cacheFiles=[
     'service-worker.js',
     'webstore.webmanifest',
     'style.css'
+    
 ];
 
 self.addEventListener('install',(e) =>{
