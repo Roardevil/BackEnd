@@ -1,3 +1,5 @@
+const { response } = require('express');
+
 let app = new Vue({
     el: "#vueapp",
     data: {
@@ -72,13 +74,13 @@ let app = new Vue({
             this.messageCheckout = "Order Placed";
 
         },
-        fetchFunction: async function (data, type,api) {
+        fetchFunction: async function (response, type,api) {
             const response = await fetch(api, {
                 method: type, //JSON
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: (JSON.stringify(data))//Sending object for if statement
+                body: (JSON.stringify(response))//Sending object for if statement
             });
             return await response.text();//Receiving response
         },
