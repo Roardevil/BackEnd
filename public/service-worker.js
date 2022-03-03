@@ -4,8 +4,11 @@ var cacheFiles=[
     'index.js',
     'service-worker.js',
     'webstore.webmanifest',
-    'style.css'
-    
+    'style.css',
+    'images/logo192.png',
+    'images/logo521.png'
+
+
     
 ];
 
