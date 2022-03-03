@@ -1,33 +1,27 @@
-//Import the express and url modules
 const { json } = require('body-parser');
 let express = require('express');
 let url = require("url");
 var cors = require('cors')
 
-
 const port = process.env.PORT || 3000
 //The express module is a function. When it is executed it returns an app object
 let app = express();
-app.use(cors())
+
 app.use(express.static("public"));
 
 
+app.use(cors())
 
+//Set up the application to handle GET requests sent to the user path
 
 
 app.use(function (request, response, next) { // middleware
     console.log("In comes a request to: " + request.url);
-
+    //     console.log("Request IP: " + req.url);
+    // console.log("Request date: " + new Date());
 
     next();
     // response.end("Hello, world!");
-});
-app.use(function (req, res, next) {
-    // allow different IP address
-    res.header({ "Access-Control-Allow-Origin": "*" });
-    // allow different header fields
-    res.header({ "Access-Control-Allow-Origin": "*" });
-    next();
 });
 
 
@@ -46,14 +40,13 @@ MongoClient.connect("mongodb+srv://Deep:deep@cluster0.u72p7.mongodb.net/"
 app.param('collectionName'
     , (req, res, next, collectionName) => {
         req.collection = db.collection(collectionName)
-        
         // console.log('collection name:', req.collection)
         return next()
     });
 var path = require("path");
 var fs = require("fs");
 
-app.use("/images", function (req, res, next) {
+app.use("/image",function (req, res, next) {
     // Uses path.join to find the path where the file should be
     var filePath = path.join(__dirname,
         "images"
@@ -69,35 +62,44 @@ app.use("/images", function (req, res, next) {
     });
 });
 
-app.use("/images", function (request, response) {
+app.use("/image", function (request, response) {
     response.writeHead(200, { "Content-Type": "text/plain" });
     response.end("Looks like you didn’t find a static file.");
 });
-app.use('/images', express.static(path.join(__dirname, 'images')))
+// app.use(function (req, res) {
+//     // Sets the status code to 404
+//     res.status(404);
+//     // Sends the error "File not found!”
+//     res.send("File not found!");
+// });
 
+
+// var publicPath = path.resolve(__dirname,
+//     "/images");
+// console.log(publicPath);
+// Sends static files from the publicPath directory
+
+// app.use("/images", express.static(publicPath));
+
+
+// dispaly a message for root path to show that API is working
 
 // retrieve all the objects from an collection
 app.get('/collection/:collectionName'
     , (req, res) => {
+        console.log("yoyoy")
         req.collection.find({}).toArray((e, results) => {
             if (e) return next(e)
             res.send(results)
         })
     })
-app.get('/collection/:collectionName/:id', (req, res) => {
-    req.collection.find({}).toArray((e, results) => {
-        if (e) return next(e)
-        res.send(results)
-    })
-})
 
 app.get('/collection/:collectionName/:searchTerm'
     , (req, res) => {
         console.log(req.params.searchTerm)
         var regex = new RegExp(req.params.searchTerm, "i");
         console.log(regex)
-
-        req.collection.find({ subject: regex }).toArray((e, results) => {
+        req.collection.find({ subject: regex}||{location:regex}).toArray((e, results) => {
             if (e) return next(e)
             res.send(results)
             console.log(results)
@@ -108,14 +110,6 @@ app.post('/collection/:collectionName'
     , (req, res, next) => {
         console.log(req);
         req.collection.insert(req.body, (e, results) => {
-            if (e) return next(e)
-            res.send(200)
-        })
-    });
-app.delete('/collection/:collectionName'
-    , (req, res, next) => {
-        console.log(req);
-        req.collection.delete(req.body, (e, results) => {
             if (e) return next(e)
             res.send(200)
         })
@@ -135,7 +129,7 @@ app.put('/collection/:collectionName/:id', (req, res, next) => {
 });
 app.use('/'
     , function (req, res) {
-        res.send('Welcome to Deep WebApp ')
+        res.send('Select a collection, e.g., /collection/messages')
     });
 
 //Start the app listening on port 8080
