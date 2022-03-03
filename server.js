@@ -17,11 +17,10 @@ app.use(cors())
 
 app.use(function (request, response, next) { // middleware
     console.log("In comes a request to: " + request.url);
-    //     console.log("Request IP: " + req.url);
-    // console.log("Request date: " + new Date());
+   
 
     next();
-    // response.end("Hello, world!");
+    
 });
 
 
