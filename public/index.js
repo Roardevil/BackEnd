@@ -51,14 +51,14 @@ let app = new Vue({
             console.log(submitform);
 
 
-            const response = await fetch('/collection/orderinfo', {
+            const data = await fetch('/collection/orderinfo', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(submitform)
             })
-            if(response=="OK"){
+            if(data=="OK"){
                 for (let i = 0; i < updateStock.length; i++) {
                     let id=updateStock[i]._id;
                     delete updateStock[i]._id;
@@ -68,19 +68,19 @@ let app = new Vue({
             }
 
             
-            console.log(response);
+            console.log(data);
 
 
             this.messageCheckout = "Order Placed";
 
         },
-        fetchFunction: async function (response, type,api) {
+        fetchFunction: async function (data, type,api) {
             const response = await fetch(api, {
                 method: type, //JSON
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: (JSON.stringify(response))//Sending object for if statement
+                body: (JSON.stringify(data))//Sending object for if statement
             });
             return await response.text();//Receiving response
         },
