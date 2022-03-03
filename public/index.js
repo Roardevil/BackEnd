@@ -1,5 +1,3 @@
-const { response } = require('express');
-
 let app = new Vue({
     el: "#vueapp",
     data: {
@@ -31,6 +29,7 @@ let app = new Vue({
             if(this.filter!="") {
                 this.product=null;
            response =  await fetch("https://deepwebapp.herokuapp.com/collection/products/"+this.filter);
+           
             }
             else{
             response = await fetch("https://deepwebapp.herokuapp.com/collection/products");
@@ -51,40 +50,19 @@ let app = new Vue({
             console.log(submitform);
 
 
-            const data = await fetch('/collection/orderinfo', {
+            const response = await fetch('/collection/orderinfo', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(submitform)
             })
-            if(data=="OK"){
-                for (let i = 0; i < updateStock.length; i++) {
-                    let id=updateStock[i]._id;
-                    delete updateStock[i]._id;
-                    let check=await this.fetchFunction(updateStock[i], "PUT","https://deepwebapp.herokuapp.com/collection/products/"+id);
-                    console.log(check);
-                }
-            }
-
-            
-            console.log(data);
+            console.log(await response.text())
 
 
             this.messageCheckout = "Order Placed";
+            console.log("sucess")
 
-        },
-        fetchFunction: async function (data, type,api) {
-            const response = await fetch(api, {
-                method: type, //JSON
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: (JSON.stringify(data))//Sending object for if statement
-            });
-            return await response.text();//Receiving response
-        },
-            
 
 
 
@@ -102,8 +80,27 @@ let app = new Vue({
                 this.cart.push(id);
             }
 
+            fetch('https://deepwebapp.herokuapp.com/collection/products' + this.product[space].id, {
 
+                method: 'PUT', //Set the HTTP method as 'PUT'
 
+                headers: {
+
+                    'Content-Type': 'application/json', //Set the data type as JSON
+
+                },
+
+                body: JSON.stringify({ "space": this.counter(product) }), //Need to stringify the JSON object
+
+            }) //chnage
+
+                .then(response => response.json())
+
+                .then(responseJSON => {
+
+                    console.log('Success:', responseJSON);  //Retuns the message of success.
+
+                });
         },
         isdisable(cet) {
             return this.product[cet].space === 0;
@@ -147,11 +144,11 @@ let app = new Vue({
 
 
 
-    
 
 
 
-    
+
+    },
     computed: {
 
 
@@ -179,11 +176,11 @@ let app = new Vue({
 
             return searchproduct
         }
-    ,
+    },
 
     mounted: function () {
         this. searchproduct();
     }
 
-    }
+
 })
