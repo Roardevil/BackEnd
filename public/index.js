@@ -23,6 +23,7 @@ let app = new Vue({
     },
     methods: {
         searchproduct: async function () {
+            console.log("rorororo");
             if (this.filter != "") {
                 this.product = null;
                 response = await fetch("https://deepwebapp.herokuapp.com/collection/products" + this.filter).then(
@@ -30,6 +31,7 @@ let app = new Vue({
                         response.json().then(
                             function (json) {
                                 // note that we used 'store.product' instead of 'this.product'
+                                console.log(json)
                                 app.products = json;
                             });
                     })
