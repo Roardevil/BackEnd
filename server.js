@@ -46,7 +46,7 @@ app.param('collectionName'
 var path = require("path");
 var fs = require("fs");
 
-app.use("/image",function (req, res, next) {
+app.use("/images",function (req, res, next) {
     // Uses path.join to find the path where the file should be
     var filePath = path.join(__dirname,
         "images"
@@ -62,29 +62,11 @@ app.use("/image",function (req, res, next) {
     });
 });
 
-app.use("/image", function (request, response) {
+app.use("/images", function (request, response) {
     response.writeHead(200, { "Content-Type": "text/plain" });
     response.end("Looks like you didn’t find a static file.");
 });
-// app.use(function (req, res) {
-//     // Sets the status code to 404
-//     res.status(404);
-//     // Sends the error "File not found!”
-//     res.send("File not found!");
-// });
 
-
-// var publicPath = path.resolve(__dirname,
-//     "/images");
-// console.log(publicPath);
-// Sends static files from the publicPath directory
-
-// app.use("/images", express.static(publicPath));
-
-
-// dispaly a message for root path to show that API is working
-
-// retrieve all the objects from an collection
 app.get('/collection/:collectionName'
     , (req, res) => {
         console.log("yoyoy")
