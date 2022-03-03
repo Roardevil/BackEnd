@@ -60,7 +60,7 @@ let app = new Vue({
                 for (let i = 0; i < updateStock.length; i++) {
                     let id=updateStock[i]._id;
                     delete updateStock[i]._id;
-                    let check=await this.fetchFunction(updateStock[i], "PUT","https://vueproject99.herokuapp.com/collection/products/"+id);
+                    let check=await this.fetchFunction(updateStock[i], "PUT","https://deepwebapp.herokuapp.com/collection/products/"+id);
                     console.log(check);
                 }
             }
