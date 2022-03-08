@@ -80,27 +80,7 @@ let app = new Vue({
                 this.cart.push(id);
             }
 
-            fetch('https://deepwebapp.herokuapp.com/collection/products' + this.product[space].id, {
-
-                method: 'PUT', //Set the HTTP method as 'PUT'
-
-                headers: {
-
-                    'Content-Type': 'application/json', //Set the data type as JSON
-
-                },
-
-                body: JSON.stringify({ "space": this.counter(product) }), //Need to stringify the JSON object
-
-            }) //chnage
-
-                .then(response => response.json())
-
-                .then(responseJSON => {
-
-                    console.log('Success:', responseJSON);  //Retuns the message of success.
-
-                });
+        
         },
         isdisable(cet) {
             return this.product[cet].space === 0;
