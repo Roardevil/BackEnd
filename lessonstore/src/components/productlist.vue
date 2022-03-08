@@ -1,6 +1,5 @@
 <template>
 <div>
-  {{"nujhuhuhu"}}
 <div v-for="(product,count) in getproduct" :key="count">
                 <img v-bind:src="product.image" height="200" width="300">
                 <p>subject: {{ product.subject}}</p>
@@ -36,9 +35,11 @@ export default {
 
     name:"productList",
     props:["getproduct"],
-    data(){
-
-    }
   
+ methods:{
+     additem(id){
+          this.$emit("additem", id);
+     }
+ } 
 }
-</script>
+</script>,

@@ -17,7 +17,8 @@
                 <i v-if="ascending" class="glyphicon glyphicon-sort"></i>
                 <i v-else class="glyphicon glyphicon-sort"></i>
             </button>
-            <!-- <input type="text" @keyup="searchproduct" v-model="filter" placeholder="Search product" id="search-input"></input> -->
+            <input type="text" @keyup="searchproduct" v-model="filter">
+          
             <i class="fa fa-search"></i>
       
 
@@ -29,7 +30,8 @@
             <br>
 
         </div>
-        <product-list :product="product" :getproduct="getproduct" ></product-list>
+        <components :is=showproduct @removeButton="removeButton" :product="product" :getproduct="getproduct" :cartCount="cartCount" @additem="additem" > </components>
+
 
       
   </div>
@@ -37,20 +39,21 @@
 
 <script>
 import productList from "./components/productlist.vue"
+import formList from "./components/formlist.vue"
 
 export default {
   name: "App",
   data(){
     return{
       product: [],
-        showproduct: true,
+        showproduct: productList,
         ascending: true,
         sortBy: 'location',
         filter:"",
         cart: [],
     }
   },
-  components: { "product-list":productList },
+  components: { "product-list":productList,"form-list":formList },
   methods:{
        searchproduct: async function () {
           
@@ -70,13 +73,13 @@ export default {
             this.product = data;
         },
 
-        additem() {
-            // if (this.product[id].space > 0) {
-            //     --this.product[id].space;
+        additem(id) {
+            if (this.product[id].space > 0) {
+                --this.product[id].space;
 
 
-            //     this.cart.push(id);
-            // }
+                this.cart.push(id);
+            }
 
         
         },
@@ -87,7 +90,7 @@ export default {
 
 
         showcheckout() {
-            this.showproduct = this.showproduct ? false : true;
+            this.showproduct = this.showproduct==productList ? formList : productList;
         },
         canaddtocart(aproduct) {
             console.log("iuhiyheiuh   " + this.products[aproduct].space + "yuguyguy  " + aproduct);

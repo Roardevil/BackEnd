@@ -1,7 +1,6 @@
 var cacheName='WebStore';
 var cacheFiles=[
     'index.html',
-    'index.js',
     'service-worker.js',
     'webstore.webmanifest',
     'style.css',
